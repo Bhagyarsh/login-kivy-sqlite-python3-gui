@@ -1,0 +1,229 @@
+#:import Window kivy.core.window.Window
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+<AccinfoPopup>:
+    size_hint: .8,.8
+    auto_dismiss: False
+    BoxLayout:
+        padding: 10
+        spacing: 10
+        orientation:'vertical'
+        Label:
+            text: root.label
+        Button:
+            text: ''
+            size_hint:None ,None
+            size:100,50
+            on_press:
+                print("changing screen")
+                root.dismiss()
+                
+                root.manager.transition = NoTransition()
+                root.manager.current = 'Login'
+            
+
+<CreateUserScreen>:
+    GridLayout:
+        id: CreateUserScreen
+        rows: 8
+        padding: 10
+        spacing: 30
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        BoxLayout:
+            padding: 1
+            spacing: 1
+        BoxLayout:
+            TextInput:
+                hint_text:"username"
+                hint_text_color: [0.5, 0.5, 0.5, 1.0]
+                id:usernameForNewUser
+                write_tab: False
+                multiline: False
+
+        BoxLayout:
+            TextInput:
+                id:Newpassword
+                hint_text:"new password"
+                password: True
+                hint_text_color: [0.5, 0.5, 0.5, 1.0]
+                write_tab: False
+                multiline: False
+
+        BoxLayout:
+            TextInput:
+                id:confirmdNewpassword
+                hint_text:"confirm password"
+                password: True
+                hint_text_color: [0.5, 0.5, 0.5, 1.0]
+                write_tab: False
+                multiline: False
+ 
+        BoxLayout:
+            TextInput:
+                id:digit_key
+                hint_text:"16 digit key"
+                hint_text_color: [0.5, 0.5, 0.5, 1.0]
+                write_tab: False
+                multiline: False
+        BoxLayout:
+            Button:
+                id:createAcc
+                text:"create Account"
+                on_press:root.createNewUser()
+
+        BoxLayout:
+            Label:
+                id:errorLabel
+                text:""
+        BoxLayout:
+            Label:
+                id:loginagain
+                text:'[ref=<str>]Login[/ref]'
+                color:[0,0,0,1]
+                underline: True
+                markup:True
+                on_ref_press:
+                    root.makeInputTextNull()
+                    root.manager.transition = NoTransition()
+                    root.manager.current = 'Login'
+<ForgotpaswordScreen>:
+    GridLayout:
+        id: ForgotpaswordScreen
+        rows: 8
+        padding: 10
+        spacing: 30
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        BoxLayout:
+            padding: 1
+            spacing: 1
+        BoxLayout:
+            TextInput:
+                hint_text:"username"
+                hint_text_color: [0.5, 0.5, 0.5, 1.0]
+                id:usernameForgetpassword
+                write_tab: False
+                multiline: False
+        BoxLayout:
+            TextInput:
+                id:NewpasswordFornew
+                hint_text:"new password"
+                password: True
+                hint_text_color: [0.5, 0.5, 0.5, 1.0]
+                write_tab: False
+                multiline: False
+        BoxLayout:
+            TextInput:
+                id:confirmdNewpasswordForNew
+                hint_text:"confirm password"
+                password: True
+                hint_text_color: [0.5, 0.5, 0.5, 1.0]
+                write_tab: False
+                multiline: False
+
+        BoxLayout:
+            TextInput:
+                id:digit_key_for_new_password
+                hint_text:"16 digit key"
+                password: True
+                hint_text_color: [0.5, 0.5, 0.5, 1.0]
+                write_tab: False
+                multiline: False
+        BoxLayout:
+            Button:
+                id:Changepassword
+                text:"change password"
+                on_press:root.change_password()
+
+        BoxLayout:
+            Label:
+                id:errorLabel
+                text:""
+        BoxLayout:
+            Label:
+                id:loginagain
+                text:'[ref=<str>]Login[/ref]'
+                color:[0,0,0,1]
+                underline: True
+                markup:True
+                on_ref_press:
+                    root.makeInputTextNull()
+                    root.manager.transition = NoTransition()
+                    root.manager.current = 'Login'
+<LoginScreen>:
+    GridLayout:
+        id: mainScreen
+        rows: 7
+        padding: 10
+        spacing: 30
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        BoxLayout:
+            padding: 1
+            spacing: 1
+        BoxLayout:
+            TextInput:
+                hint_text:"username"
+                write_tab: False
+                multiline: False
+                hint_text_color: [0.5, 0.5, 0.5, 1.0]
+                id:username
+        #         padding_x:
+        #             [self.center[0] - self._get_text_width(max(self._lines, key=len), self.tab_width, self._label_cached) / 2.0,0] if self.text else [self.center[0], 0]
+        # # top, bottom
+        #         padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+        BoxLayout:
+            TextInput:
+                id:password
+                write_tab: False
+                multiline: False
+                hint_text:"password"
+                password: True
+                hint_text_color: [0.5, 0.5, 0.5, 1.0]
+        BoxLayout:
+            Button:
+                id:login
+                text:"Login"
+                background_color: [1,1,1,1]
+                on_press: root.login()
+        BoxLayout:
+            Label:
+                id:loginError
+                text:''
+                markup:True
+                color:[1,0,0,1]
+        BoxLayout:
+            Label:
+                id:ForgotPassword
+                text:'[ref=<str>] Forgot password[/ref]'
+                markup:True
+                color:[0,0,0,1]
+                underline: True
+                on_ref_press:
+                    root.makeInputTextNull()
+                    root.manager.transition = NoTransition()
+                    root.manager.current = 'Forgotpassword'
+
+        BoxLayout:
+            Label:
+                id:createUser
+                text:'[ref=<str>] Create user[/ref]'
+                color:[0,0,0,1]
+                underline: True
+                markup:True
+                on_ref_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = 'CreateUser'
+               
